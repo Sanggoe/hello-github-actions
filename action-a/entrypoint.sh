@@ -1,3 +1,3 @@
-#! / bin / sh -l
+#!/bin/sh -l
 
-sh -c " echo Hello world 내 이름은 $ INPUT_MY_NAME "입니다.
+sh -c "echo Hello world my name is $INPUT_MY_NAME"
