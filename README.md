@@ -110,7 +110,7 @@
    * ex) `learn-github-actions.yml`
 
      ```yaml
-     name: learn-github-actions.yml
+     name: learn-github-actions
      on: [push]
      jobs:
        check-bats-version:
@@ -128,4 +128,49 @@
 
 <br/>
 
+#### workflow 파일 이해하기
+
+> 위에서 정의한 `learn-github-actions.yml` 파일을 분석해보자.
+
+<br/>
+
+```yaml
+name: learn-github-actions
+```
+
+* 해당 workflow 파일의 이름
+
+<br/>
+
 #### workflow 활동 보기
+
+1. Github repository 기본 page로 이동한다.
+
+2. Actions를 클릭한다.
+
+   * 아직 workflow_.yml 파일이 push 되지 않았다면
+
+     다음과 같이 github action 시작 안내 화면이 뜬다.
+
+   ![image-20210807151010751](./imgs/image-20210807151010751.png)
+
+3. 왼쪽 사이드바에서 보려는 Workflow를 클릭한다.
+
+   ![image-20210807170032462](./imgs/image-20210807170032462.png)
+
+4. workflow run 에서 보고싶은 작업 이름을 클릭한다.
+
+   ![image-20210807170057264](./imgs/image-20210807170057264.png)
+
+5. Jobs 아래에서 보고싶은 job 이름을 클릭한다.
+
+   ![image-20210807170348441](./imgs/image-20210807170348441.png)
+
+6. 각 step의 결과를 볼 수 있다.
+
+   ![image-20210807170524577](./imgs/image-20210807170524577.png)
+
+<br/>
+
+<br/>
+
