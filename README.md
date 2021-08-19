@@ -1,4 +1,4 @@
-# Github-Actions
+## Github-Actions 소개
 
 ### Github Actions란?
 
@@ -112,19 +112,25 @@
      ```yaml
      name: learn-github-actions
      on: [push]
+     
      jobs:
        check-bats-version:
          runs-on: ubuntu-latest
+         
          steps:
            - uses: actions/checkout@v2
+           
            - uses: actions/setup-node@v2
              with:
                node-version: '14'
+               
            - run: npm install -g bats
            - run: bats -v
      ```
 
 3. 변경 사항을 add, commit 후 git repository에 push 한다.
+
+<br/>
 
 <br/>
 
@@ -138,7 +144,100 @@
 name: learn-github-actions
 ```
 
-* 해당 workflow 파일의 이름
+* Github repository의 Actions 탭에 표시될 이름
+
+<br/>
+
+```yaml
+on: [push]
+```
+
+* workflow 파일을 자동으로 실행시킬 event를 지정하는 구문
+* 'Repository에 `push` 하면 이 workflow를 실행한다' 라는 조건을 의미
+* `on` 키워드를 이용해 특정 분기, 경로, 태그에서만 실행되도록 설정 가능
+
+<br/>
+
+```yaml
+jobs:
+```
+
+* 해당 workflow에서 실행되는 작업을 묶어 그룹화하는 키워드
+
+<br/>
+
+```yaml
+  check-bats-version:
+```
+
+* 해당 job의 이름을 `check-bats-version` 으로 정의
+
+<br/>
+
+```yaml
+    runs-on: ubuntu-latest
+```
+
+* workflow가 구동되는 환경의 OS를 Ubuntu Linux로  구성
+* Github에서 호스팅하는 새로운 가상 머신에서 실행됨을 의미
+* [다른 러너를 사용하는 구문 예제](https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on)
+
+<br/>
+
+```yaml
+    steps:
+```
+
+* `check-bats-version` job에서 실행되는 모든 단계를 함께 그룹화
+* 별도의 action 이나 shell command들을 하위 항목으로 가질 수 있음
+
+<br/>
+
+```yaml
+      - uses: actions/checkout@v2
+```
+
+* `uses` 키워드는 어떤 action을 수행할지 지정하는 항목
+* 위의 경우, 이미 만들어진 action을 검색해 수행함
+  * repository를 체크아웃하고 runner에 다운로드하여 코드에 대한 작업을 실행할 수 있도록 하는 작업
+    * 예) 테스트 도구
+  * workflow가 code에 대해 실행되거나, repository에 정의된 작업을 사용할 때마다 체크아웃 작업이 필요
+
+<br/>
+
+```yaml
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+```
+
+* `actions/setup-node@v2` action으로 runner에 `node` 소프트웨어의 지정된 버전을 설치
+* 그러면 `npm`를 사용 하여 명령에 액세스 가능
+
+<br/>
+
+```yaml
+      - run: npm install -g bats
+```
+
+* `run` 키워드는 runner에서 수행할 명령어 작업을 의미
+* 위 경우, npm을 사용하여 bats 소프트웨어 테스트 패키지를 설치
+
+<br/>
+
+```yaml
+      - run: bats -v
+```
+
+* 마지막으로 `bats` 소프트웨어의 버전을 출력하는 명령어 작업을 수행
+
+<br/>
+
+#### workflow 파일의 시각화
+
+![워크플로 개요](./imgs/overview-actions-event.png)
+
+<br/>
 
 <br/>
 
@@ -174,3 +273,24 @@ name: learn-github-actions
 
 <br/>
 
+<br/>
+
+## 작업 찾기 및 커스터마이징하기
+
+* Actions는 workflow를 강화하고 구성하는 빌딩 블록이다.
+* workflow는 이미 만들어져 있는 Actions를 커뮤니티에서 다운받아 포함하거나, 사용자가 직접 나만의 작업을 만들 수 있다.
+* 작업을 검색하거나 사용하는 법 및 사용자 지정하는 방법에 대해 알아보자.
+
+<br/>
+
+### 개요
+
+workflow에서 사용하는 작업은 다음에서 정의할 수 있다.
+
+* 공개 Repository
+* workflow 파일이 작업을 참조하는 동일한 repository
+* Docker Hub에 게시된 Docker container 이미지
+
+
+
+[이어서 공부할 곳](https://docs.github.com/en/actions/learn-github-actions/finding-and-customizing-actions)
